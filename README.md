@@ -12,3 +12,8 @@
 1. Clone the repository:
    ```bash
    git clone https://github.com/Loberia-Tactical-Group/Loberia-Shield.git
+   ```
+
+   ## 📥 Download
+Get the latest professional installer here:
+[![Download](https://img.shields.io/badge/Download-Loberia_Shield_XDR-blue?style=for-the-badge&logo=windows)](https://github.com/Loberia-Tactical-Group/Loberia-Shield/releases/download/v1.0/LoberiaShield_XDR_v1.0_Setup.exe)
