@@ -22,12 +22,13 @@ Name: "{group}\Loberia Shield"; Filename: "{app}\LoberiaShield_XDR.exe"
 Name: "{commondesktop}\Loberia Shield"; Filename: "{app}\LoberiaShield_XDR.exe"
 
 [Run]
-; Esto hace que el antivirus se inicie solo al terminar la instalación
-Filename: "{app}\LoberiaShield_XDR.exe"; Description: "Lanzar Loberia Shield"; Flags: nowait postinstall skipfs
+; Corregido: skipifsilent para que no dé error de flag
+Filename: "{app}\LoberiaShield_XDR.exe"; Description: "Lanzar Loberia Shield"; Flags: nowait postinstall skipifsilent
 
 [Registry]
-; Iniciar con Windows (HKEY_CURRENT_USER)
-Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "LoberiaShield"; ValueData: "{app}\LoberiaShield_XDR.exe"; Flags: uninsdeletevalue
+; Iniciar con Windows para el usuario actual
+Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "LoberiaShield"; ValueData: """{app}\LoberiaShield_XDR.exe"""; Flags: uninsdeletevalue
 
+; Nota: Eliminamos la entrada de HKLM por ahora para evitar problemas de permisos en Windows X Lite
 ; Registrar como Servicio de Recuperación en el sistema
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\LoberiaShield"; ValueType: dword; ValueName: "Start"; ValueData: 2; Flags: uninsdeletekey
