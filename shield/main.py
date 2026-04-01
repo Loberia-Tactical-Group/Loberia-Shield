@@ -1,5 +1,14 @@
 import platform
 import os
+import sys
+
+# Esto obliga a que el programa busque librerías en su propia carpeta
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+try:
+    import watchdog
+except ImportError:
+    print("Error crítico: Watchdog no encontrado")
 from core.scanner import cloud_scan 
 from core.quarantine import isolate_file
 from engines.watcher import start_watcher 
@@ -32,9 +41,14 @@ def main():
     print(f"      Status: ACTIVE | OS: {system}")
     print("="*50)
     
-    # OPCIÓN 1: Iniciar Vigilancia en Tiempo Real (Por defecto)
-    print("[+] Iniciando centinela de archivos...")
-    start_watcher()
+    # --- AJUSTE TÁCTICO DE RUTA ---
+    # Esto asegura que el programa siempre encuentre una carpeta válida para vigilar
+    path_to_watch = os.path.expanduser("~\\Downloads") 
+    
+    print(f"[+] Iniciando centinela de archivos en: {path_to_watch}")
+    
+    # Pasamos la ruta a la función para que no de error
+    start_watcher(path_to_watch)
 
 if __name__ == "__main__":
     try:
