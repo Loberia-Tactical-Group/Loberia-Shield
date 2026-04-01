@@ -1,7 +1,21 @@
 import platform
-from core.scanner import cloud_scan
+# Al estar en la misma carpeta, la importación es directa
+from core.scanner import cloud_scan 
 from core.quarantine import isolate_file
+# Importamos el vigilante que acabamos de crear
+from engines.watcher import start_watcher 
 
+def main():
+    print("="*50)
+    print("      LOBERIA SHIELD XDR - ACTIVE DEFENSE")
+    print("="*50)
+    
+    # Iniciamos el modo vigilancia por defecto
+    start_watcher()
+
+if __name__ == "__main__":
+    main()
+    
 # TU LLAVE TÁCTICA
 VT_API_KEY = "94279753f4b98eba82791d0761854a758631d5778f9d58fe7c9366484061ce39"
 
