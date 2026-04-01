@@ -201,6 +201,25 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# --- LOBERIA TACTICAL SHIELD SPECIFIC ---
+
+# Jamás subir la base de datos de virus capturados
+Quarantine/
+*.loberia
+
+# Archivos de configuración local con llaves de API
+.env
+config.json
+secrets.py
+
+# Logs de incidentes locales
+shield/logs/
+*.log
+
+# Binarios generados (EXEs) para que no pesen en el repo
+*.exe
+*.bin
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
