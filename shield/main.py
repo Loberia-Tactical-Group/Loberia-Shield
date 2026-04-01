@@ -1,32 +1,21 @@
 import platform
-# Al estar en la misma carpeta, la importación es directa
+import os
 from core.scanner import cloud_scan 
 from core.quarantine import isolate_file
-# Importamos el vigilante que acabamos de crear
 from engines.watcher import start_watcher 
 
-def main():
-    print("="*50)
-    print("      LOBERIA SHIELD XDR - ACTIVE DEFENSE")
-    print("="*50)
-    
-    # Iniciamos el modo vigilancia por defecto
-    start_watcher()
-
-if __name__ == "__main__":
-    main()
-    
-# TU LLAVE TÁCTICA
+# --- CONFIGURACIÓN GLOBAL DE LOBERIA ---
 VT_API_KEY = "94279753f4b98eba82791d0761854a758631d5778f9d58fe7c9366484061ce39"
 
 def process_threat(file_path):
+    """Analiza y procesa una amenaza específica."""
     print(f"[*] Analizando objetivo: {file_path}")
     
     # Consultamos a la nube de Loberia
     result = cloud_scan(file_path, VT_API_KEY)
-    print(result)
+    print(f"[*] Resultado: {result}")
     
-    if "DANGER" in result:
+    if "DANGER" in result or "❌" in result:
         print("[!] Procediendo a neutralización inmediata...")
         success, path = isolate_file(file_path)
         if success:
@@ -34,10 +23,21 @@ def process_threat(file_path):
         else:
             print(f"[✘] Error en la extracción: {path}")
 
-if __name__ == "__main__":
+def main():
+    """Punto de entrada principal del Sistema Shield."""
+    system = platform.system()
+    
     print("="*50)
     print("      LOBERIA SHIELD XDR - ACTIVE DEFENSE")
+    print(f"      Status: ACTIVE | OS: {system}")
     print("="*50)
     
-    # Prueba táctica (puedes cambiar esto por una ruta real de un archivo sospechoso)
-    # process_threat("C:/Descargas/archivo_raro.exe")
+    # OPCIÓN 1: Iniciar Vigilancia en Tiempo Real (Por defecto)
+    print("[+] Iniciando centinela de archivos...")
+    start_watcher()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n[!] Loberia Shield desactivado por el usuario.")
